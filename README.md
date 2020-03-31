@@ -1,7 +1,7 @@
-# virtual-keyboard
+#completed task ---> 
 https://davinchick.github.io/virtual-keyboard/virtual_keyboard.html
 
-**RSS Виртуальная клавиатура**
+**RSS virtual-keyboard**
 
 *Requirements:*
 - implement structure of DOM-elements,

@@ -62,9 +62,9 @@ window.addEventListener("DOMContentLoaded", function () {
             ["Shift","Shift"], ["я","Я"], ["ч","Ч"], ["с","С"], ["м","М"], ["и","И"], ["т","Т"], ["ь","Ь"], ["б","Б"], ["ю","Ю"], [".",","], ["▲","▲"], ["ShiftR","ShiftR"],
             ["Ctrl","Ctrl"], ["Win","Win"], ["Alt","Alt"], ["Space","Space"], ["Alt", "Alt"], ["◄", "◄"], ["▼", "▼"], ["►","►"], ["Ctrl","Ctrl"] ],
     
-            [ ["\`","\~"], ["1", "!"], ["2", "@"], ["3", "#"], ["4", "$"], ["5", "%"], ["6", "^"], ["7", "&"], ["8", "*"], ["9", "("], ["0", ")"], ["-", "_"], ["=", "+"], ["Backspace", "Backspace"],
+            [ ["`","~"], ["1", "!"], ["2", "@"], ["3", "#"], ["4", "$"], ["5", "%"], ["6", "^"], ["7", "&"], ["8", "*"], ["9", "("], ["0", ")"], ["-", "_"], ["=", "+"], ["Backspace", "Backspace"],
             ["Tab", "Tab"], ["q", "Q"], ["w", "W"], ["e", "E"], ["r", "R"], ["t", "T"], ["y", "Y"], ["u", "U"], ["i", "I"], ["o", "O"], ["p", "P"], ["[", "{"], ["]", "}"], ["\\", "|"], ["Del", "Del"],
-            ["Caps Lock", "Caps Lock"], ["a", "A"], ["s", "S"], ["d", "D"], ["f", "F"], ["g", "G"], ["h", "H"], ["j", "J"], ["k", "K"], ["l", "L"], [";", ":"], ["\'", "\""], ["Enter", "Enter"],
+            ["Caps Lock", "Caps Lock"], ["a", "A"], ["s", "S"], ["d", "D"], ["f", "F"], ["g", "G"], ["h", "H"], ["j", "J"], ["k", "K"], ["l", "L"], [";", ":"], ["'", "\""], ["Enter", "Enter"],
             ["Shift", "Shift"], ["z", "Z"], ["x", "X"], ["c", "C"], ["v", "V"], ["b", "B"], ["n", "N"], ["m", "M"], [",", "<"], [".", ">"], ["/", "?"], ["▲", "▲"], ["Shift", "Shift"],
             ["Ctrl", "Ctrl"], ["Win", "Win"], ["Alt", "Alt"], ["Space", "Space"], ["Alt", "Alt"], ["◄", "◄"], ["▼", "▼"], ["►", "►"], ["Ctrl", "Ctrl"] ],
     
@@ -362,23 +362,33 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     
         function UpArrow() {
-            currentPosition = newTextarea.selectionStart;
-            if (currentPosition) {
-                newTextarea.setSelectionRange(currentPosition - 1, currentPosition - 15);
-            }
+            currentPosition = newTextarea.selectionEnd;
+            var previousLine = newTextarea.value.lastIndexOf("\n", currentPosition);
+            var prePreviousLine = newTextarea.value.lastIndexOf("\n", previousLine - 1);
+            if (previousLine === -1) {currentPosition = 0; }
+            currentPosition = currentPosition - previousLine;
+            newTextarea.selectionStart = newTextarea.selectionEnd = prePreviousLine + currentPosition; 
         }
     
         function DownArrow() {
-            currentPosition = newTextarea.selectionStart;
-            newTextarea.setSelectionRange(currentPosition + 1, currentPosition + 15);
+            currentPosition = newTextarea.selectionEnd;
+            var previousLine = newTextarea.value.lastIndexOf("\n", currentPosition);
+            var nextLine = newTextarea.value.indexOf("\n", currentPosition + 1);
+            console.log(nextLine);
+            if (nextLine === -1) {currentPosition = currentPosition + newTextarea.value.length; }
+            currentPosition = currentPosition - previousLine;
+            newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition; 
         }
     
     // :D
         var kuma = document.getElementById("kuma");
         kuma.style.cursor = "pointer";
-        kuma.onclick = () => {
+        kuma.addEventListener( "click", () => { 
             kuma.insertAdjacentHTML("beforeend", "<img src=\"kuma.jpg\" alt =\"kuma\">");
-        };
+              setTimeout( function () { 
+                    kuma.remove(kuma.lastElementChild);   
+                }, 1100); 
+            });  
     
     
     });
