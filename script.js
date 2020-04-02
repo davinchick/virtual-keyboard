@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
     var divH = document.createElement("h2");
     divH.setAttribute("style", "color: rgb(155, 190, 180); font-family: \"Orbitron\", sans-serif; font-size: 26px; " +
         "text-shadow: #fff 3px 3px 1px, #000 -1px -1px 1px; text-align: center; letter-spacing: 4px;");
-    divH.innerHTML = "Virtual <span id=\"kuma\">Kumamon</span> Keyboard!!";
+    divH.innerHTML = "Virtual <span id=\"kuma\">Kumamon</span> Keyboard";
     divBlock.appendChild(divH);
     
     var newTextarea = document.createElement("textarea");
@@ -91,7 +91,11 @@ window.addEventListener("DOMContentLoaded", function () {
         if (j===13 || j===28 || j===41 || j===54 ) { keysContainer.insertAdjacentHTML("beforeend", "<br>");}
     }
     
-    
+    function keyText(languageLayout, upperCase) {
+        for (let j = 0; j < allButtons.length; j += 1) {
+            allButtons[j].innerText = (languageLayout === "ru") ? keyRussianLayout[j][upperCase] : keyEnglishLayout[j][upperCase];
+        }
+    }
     var allButtons = document.querySelectorAll(".btn");
     
     // -------------------- css style (width) for big buttons
@@ -128,12 +132,10 @@ window.addEventListener("DOMContentLoaded", function () {
     }
     
     
-    function keyText(languageLayout, upperCase) {
-        for (let j = 0; j < allButtons.length; j += 1) {
-            allButtons[j].innerText = (languageLayout === "ru") ? keyRussianLayout[j][upperCase] : keyEnglishLayout[j][upperCase];
-        }
-    }
     
+    
+    // -------- Changing lang function
+
     let currentLang = (localStorage.lang === "ru") ? "ru" : "en";
     let shiftToUpperCase = 0;
     
@@ -380,6 +382,9 @@ window.addEventListener("DOMContentLoaded", function () {
             newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition; 
         }
     
+
+
+
     // :D
         var kuma = document.getElementById("kuma");
         kuma.style.cursor = "pointer";
@@ -391,4 +396,34 @@ window.addEventListener("DOMContentLoaded", function () {
             });  
     
     
+        const matrixText = ["Hello, Neo!\n", "I watching you....."];
+            function text(){
+                let line =0;
+                let count = 0;
+                let out = ""; 
+                function type() {
+                    let interval = setTimeout(() => {
+                        out+= matrixText[line][count];
+                        newTextarea.innerHTML = out + "|";
+                        count++;
+                        if(count >= matrixText[line].length){
+                            count = 0;
+                            line++;
+                            if(line === matrixText.length){
+                                clearTimeout(interval);
+                                newTextarea.innerHTML = "";
+                                return true;
+                            }
+                        }
+                        type();
+                    }, random(random(340*2.2)));
+                }
+                type();
+            }
+            function random(max) {
+                return Math.floor(Math.random()*Math.floor(max));
+            }
+            text();
+
+
     });
