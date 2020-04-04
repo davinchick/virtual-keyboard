@@ -194,10 +194,6 @@ window.addEventListener("DOMContentLoaded", function () {
                     leftArrow(); break;
                 case "ArrowRight":
                     rightArrow(); break;
-                case "ArrowUp":
-                    UpArrow(); break;
-                case "ArrowDown":
-                    DownArrow(); break;
                 case "AltLeft":
                     alt = true; break;
                 case "ShiftLeft":
@@ -250,6 +246,7 @@ window.addEventListener("DOMContentLoaded", function () {
     
     for (let i = 0; i < allButtons.length; i += 1) {
         allButtons[i].addEventListener("mousedown", (event) => {
+            newTextarea.focus();
             if ( keyCodes.includes(event.target.classList[1]) ) {
                 document.querySelector(`.${event.target.classList[1]}`).style.boxShadow = "2px 2px 2px rgb(155, 190, 180), 1px 1px 1px white, inset 1px 1px 2px white";
                 document.querySelector(`.${event.target.classList[1]}`).style.transform = "scale(0.92)";
@@ -271,12 +268,8 @@ window.addEventListener("DOMContentLoaded", function () {
                         btnEnter(); break;
                     case "Space":
                         printText(" "); break;
-                    case "▲":
-                        UpArrow(); break;
                     case "◄":
                         leftArrow(); break;
-                    case "▼":
-                        DownArrow(); break;
                     case "►":
                         rightArrow(); break;
                     case "Tab":
@@ -293,7 +286,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }
     
     
-    // ---------------------------------------special buttons events
+    // ---------------------------------------special button events
     
     let currentPosition = 0;
 
@@ -342,35 +335,8 @@ window.addEventListener("DOMContentLoaded", function () {
             currentPosition = newTextarea.selectionStart;
             newTextarea.setSelectionRange(currentPosition + 1, currentPosition + 1);
         }
-    
-        function UpArrow() {
-            currentPosition = newTextarea.selectionEnd;
-            var previousLine = newTextarea.value.lastIndexOf("\n", currentPosition);
-            var prePreviousLine = newTextarea.value.lastIndexOf("\n", previousLine - 1);
-            console.log(previousLine);
-            console.log(prePreviousLine);
-            if(previousLine - prePreviousLine -1 <10){
-                currentPosition = 0; 
-                newTextarea.selectionStart = newTextarea.selectionEnd = currentPosition;
-            }
-            else if (prePreviousLine === -1) {
-                currentPosition = 0; 
-                newTextarea.selectionStart = newTextarea.selectionEnd = prePreviousLine + currentPosition;}
-            else { currentPosition = currentPosition - previousLine;
-            newTextarea.selectionStart = newTextarea.selectionEnd = prePreviousLine + currentPosition; }
-        }
-    
-        function DownArrow() {
-            currentPosition = newTextarea.selectionEnd;
-            var previousLine = newTextarea.value.lastIndexOf("\n", currentPosition);
-            var nextLine = newTextarea.value.indexOf("\n", currentPosition + 1); 
-            if (nextLine === -1) {
-                currentPosition = currentPosition + newTextarea.value.length; 
-                newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition;}
-            else {currentPosition = currentPosition - previousLine;
-            newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition; }
-        }
      
+
 
     // :D   
         const matrixText = ["I'm watching you....."];
