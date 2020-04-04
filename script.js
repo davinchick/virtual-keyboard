@@ -15,15 +15,15 @@ window.addEventListener("DOMContentLoaded", function () {
     
     var divH = document.createElement("h2");
     divH.setAttribute("style", "color: rgb(155, 190, 180); font-family: \"Orbitron\", sans-serif; font-size: 26px; " +
-        "text-shadow: #fff 3px 3px 1px, #000 -1px -1px 1px; text-align: center; letter-spacing: 4px;");
-    divH.innerHTML = "Virtual <span id=\"kuma\">Kumamon</span> Keyboard";
+        "text-shadow: #fff 3px 3px 3px, #000 -1px -1px 2px; text-align: center; letter-spacing: 4px;");
+    divH.innerHTML = "Virtual Kumamon Keyboard";
     divBlock.appendChild(divH);
     
     var newTextarea = document.createElement("textarea");
     newTextarea.setAttribute("class", "textarea");
     newTextarea.setAttribute("rows", "10");
     newTextarea.setAttribute("cols", "60");
-    newTextarea.setAttribute("style", "width: 500px; margin: 0 auto; outline: none; border: 0.5px solid #eee;" +
+    newTextarea.setAttribute("style", "width: 550px; margin: 0 auto; outline: none; border: 0.5px solid #eee;" +
         " border-radius: 10px; box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 0.3), inset 1px 1px 3px lightsteelblue, inset -1px -1px 5px lightsteelblue ; " +
         " padding: 10px 15px; font-family: \"Orbitron\", sans-serif; font-weight: 400; overflow: hidden; margin-bottom: 80px;");
     divBlock.appendChild(newTextarea);
@@ -41,9 +41,9 @@ window.addEventListener("DOMContentLoaded", function () {
     main.classList.add("keyboard");
     main.style.cssText = "margin: 0 auto; text-align: center; user-select: none;";
     keysContainer.classList.add("keyboard__keys");
-    keysContainer.style.cssText = "text-align: center; background-color: #E6E6E6; user-select: none;" +
+    keysContainer.style.cssText = "text-align: center; background-color: rgb(245, 241, 241); user-select: none;" +
         "border-radius: 15px; margin-bottom: 40px; padding: 10px 10px; border: 2px solid rgba(186, 186, 186, 0.4);" +
-        "box-shadow: 3px 9px 3px lightsteelblue, inset 2px 3px 2px white;";
+        "box-shadow: 5px 9px 15px lightsteelblue, inset 3px 3px 2px white;";
     main.appendChild(keysContainer);
     divBlock.appendChild(main);
     
@@ -57,8 +57,8 @@ window.addEventListener("DOMContentLoaded", function () {
            keyCodes
            ] = [
             [ ["ё","Ё"], ["1","!"], ["2","\""], ["3","№"], ["4",";"], ["5","%"], ["6",":"], ["7","?"], ["8","*"], ["9","("], ["0",")"], ["-","_"], ["=","+"], ["Backspace","Backspace"],
-            ["Tab","Tab"], ["й","Й"], ["ц","Ц"], ["у","У"], ["к","К"], ["е","Е"], ["н","Н"], ["г","Г"], ["ш","Ш"], ["щ","Щ"], ["з","з"], ["х","Х"], ["ъ","Ъ"], ["\\","/"], ["Del","Del"],
-            ["Caps Lock","Caps Lock"], ["ф","Ф"], ["ы","Ы"], ["в","В"], ["а","А"], ["п","П"], ["р","Р"], ["о","О"], ["л","Л"], ["д","Д"], ["ж","Ж"], ["э","Э"], ["Enter ┛","Enter ┛"],
+            ["Tab","Tab"], ["й","Й"], ["ц","Ц"], ["у","У"], ["к","К"], ["е","Е"], ["н","Н"], ["г","Г"], ["ш","Ш"], ["щ","Щ"], ["з","З"], ["х","Х"], ["ъ","Ъ"], ["\\","/"], ["Del","Del"],
+            ["Caps Lock","Caps Lock"], ["ф","Ф"], ["ы","Ы"], ["в","В"], ["а","А"], ["п","П"], ["р","Р"], ["о","О"], ["л","Л"], ["д","Д"], ["ж","Ж"], ["э","Э"], ["Enter","Enter"],
             ["Shift","Shift"], ["я","Я"], ["ч","Ч"], ["с","С"], ["м","М"], ["и","И"], ["т","Т"], ["ь","Ь"], ["б","Б"], ["ю","Ю"], [".",","], ["▲","▲"], ["ShiftR","ShiftR"],
             ["Ctrl","Ctrl"], ["Win","Win"], ["Alt","Alt"], ["Space","Space"], ["Alt", "Alt"], ["◄", "◄"], ["▼", "▼"], ["►","►"], ["Ctrl","Ctrl"] ],
     
@@ -81,11 +81,11 @@ window.addEventListener("DOMContentLoaded", function () {
                 el.setAttribute("type", "button");
                 el.classList.add("btn");
                 el.classList.add(key);
-                el.style.cssText = "height: 40px; width: 40px; border-radius: 4px; border: none; color: #2d2d2d; " +
+                el.style.cssText = "height: 42px; width: 40px; border-radius: 4px; border: none; color: #2d2d2d; " +
                     "font-family: \"Orbitron\", sans-serif; font-weight: 400; background-color: rgba(186, 186, 186, 0.4);" +
                     "outline: none; box-shadow: 3px 6px 2px rgb(155, 190, 180), 1px 1px 9px white, inset 1px 1px 2px white;" +
-                    "cursor: pointer; font-size: 15px; -webkit-tap-highlight-color: transparent; position: relative; " +
-                    "text-shadow: 1px 1px white; margin: 3px; display: inline-flex; align-items: center;" +
+                    "cursor: pointer; font-size: 16px; -webkit-tap-highlight-color: transparent; position: relative; " +
+                    "text-shadow: 1px 1px 1px white, black 1px 1px 1px; margin: 3px; display: inline-flex; align-items: center;" +
                     " justify-content: center; vertical-align: top;";
                 keysContainer.appendChild(el);
         if (j===13 || j===28 || j===41 || j===54 ) { keysContainer.insertAdjacentHTML("beforeend", "<br>");}
@@ -150,23 +150,15 @@ window.addEventListener("DOMContentLoaded", function () {
     
     
     // -------------------------------------------------------- main print functions
-        let currentPosition = 0;
-    
-    function printText(letter) {
-        deleteText();
-        currentPosition = newTextarea.selectionStart;
-        newTextarea.value = newTextarea.value.slice(0, currentPosition) + letter + newTextarea.value.slice(currentPosition+1);
-        newTextarea.setSelectionRange(currentPosition + 1, currentPosition + 1);
+           
+    function printText(letter) { 
+        newTextarea.setRangeText(letter, newTextarea.selectionStart, newTextarea.selectionEnd, "end"); 
     }
     
-    function deleteText() {
-          currentPosition = newTextarea.selectionStart;
-          newTextarea.value = newTextarea.value.slice(0, currentPosition) + newTextarea.value.slice(newTextarea.selectionEnd-1);
-          newTextarea.setSelectionRange(currentPosition, currentPosition);
+    function deleteText() { 
+        newTextarea.setRangeText("", newTextarea.selectionStart, newTextarea.selectionEnd, "end"); 
     }
-    
-    
-    
+     
     
     
     
@@ -178,13 +170,12 @@ window.addEventListener("DOMContentLoaded", function () {
     
     document.body.addEventListener("keydown", (event) => {
         event.preventDefault();
-    
-        let j = keyCodes.indexOf(event.code);
-        console.log(event.code);
+        newTextarea.focus(); 
+        let j = keyCodes.indexOf(event.code); 
     
         if (keyCodes.includes(event.code)) {
             document.querySelector(`.${event.code}`).style.boxShadow = "2px 2px 2px rgb(155, 190, 180), 1px 1px 1px white, inset 1px 1px 2px white";
-            document.querySelector(`.${event.code}`).style.transform = "scale(0.95), translateY(-1px)";
+            document.querySelector(`.${event.code}`).style.transform = "scale(0.92)";
             document.querySelector(`.${event.code}`).style.fontWeight = "bold";
             switch (event.code) {
                 case "CapsLock":
@@ -218,8 +209,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     break;
                 default:
                     if (currentLang === "ru") {
-                        printText(keyRussianLayout[j][shiftToUpperCase]);
-                                            // console.log(keyRussianLayout[j][shift]);
+                        printText(keyRussianLayout[j][shiftToUpperCase]); 
                     } else { printText(keyEnglishLayout[j][shiftToUpperCase]); }
                     j++;
             }
@@ -237,7 +227,7 @@ window.addEventListener("DOMContentLoaded", function () {
     document.body.addEventListener("keyup", (event) => {
         if (keyCodes.includes(event.code)) {
                 document.querySelector(`.${event.code}`).style.boxShadow = "3px 5px 2px rgb(155, 190, 180), 1px 1px 9px white, inset 1px 1px 2px white";
-                document.querySelector(`.${event.code}`).style.transform = "scale(1), translateY(0px)";
+                document.querySelector(`.${event.code}`).style.transform = "scale(1)";
                 document.querySelector(`.${event.code}`).style.fontWeight = "normal";
                 switch (event.code) {
                     case "AltLeft":
@@ -262,14 +252,13 @@ window.addEventListener("DOMContentLoaded", function () {
         allButtons[i].addEventListener("mousedown", (event) => {
             if ( keyCodes.includes(event.target.classList[1]) ) {
                 document.querySelector(`.${event.target.classList[1]}`).style.boxShadow = "2px 2px 2px rgb(155, 190, 180), 1px 1px 1px white, inset 1px 1px 2px white";
-                document.querySelector(`.${event.target.classList[1]}`).style.transform = "scale(0.95), translateY(-1px)";
+                document.querySelector(`.${event.target.classList[1]}`).style.transform = "scale(0.92)";
                 document.querySelector(`.${event.target.classList[1]}`).style.fontWeight = "bold";
-            }
-            console.log(event.target.classList[1]);
+            } 
         });
         allButtons[i].addEventListener("mouseup", (event) => {
                 document.querySelector(`.${event.target.classList[1]}`).style.boxShadow = "3px 5px 2px rgb(155, 190, 180), 1px 1px 9px white, inset 1px 1px 2px white";
-                document.querySelector(`.${event.target.classList[1]}`).style.transform = "scale(1), translateY(0px)";
+                document.querySelector(`.${event.target.classList[1]}`).style.transform = "scale(1)";
                 document.querySelector(`.${event.target.classList[1]}`).style.fontWeight = "normal";
                 switch (event.target.innerText) {
                     case "Caps Lock":
@@ -304,35 +293,29 @@ window.addEventListener("DOMContentLoaded", function () {
     }
     
     
-    // --------------------------------------- buttons events
+    // ---------------------------------------special buttons events
     
+    let currentPosition = 0;
+
         function btnBackspace() {
             if (newTextarea.selectionStart !== newTextarea.selectionEnd) {
                 deleteText();
-                currentPosition = newTextarea.selectionStart + 1;
-            } else {
-                currentPosition = newTextarea.selectionStart;
-            }
-            if (currentPosition) {
-                newTextarea.value = newTextarea.value.slice(0, currentPosition - 1) + newTextarea.value.slice(currentPosition);
-                newTextarea.setSelectionRange(currentPosition - 1, currentPosition - 1);
+                currentPosition = newTextarea.selectionEnd;
+            } else { 
+                newTextarea.setRangeText("", newTextarea.selectionStart-1, newTextarea.selectionEnd, "end"); 
             }
         }
     
         function btnDel() {
             if (newTextarea.selectionStart !== newTextarea.selectionEnd) {
                 deleteText();
-                currentPosition = newTextarea.selectionStart - 2;
-            }
-            currentPosition = newTextarea.selectionStart;
-            newTextarea.value = newTextarea.value.slice(0, currentPosition) + newTextarea.value.slice(currentPosition + 1);
-            newTextarea.setSelectionRange(currentPosition, currentPosition);
+                currentPosition = newTextarea.selectionEnd;
+            } else {
+            newTextarea.setRangeText("", newTextarea.selectionStart, newTextarea.selectionEnd+1, "end"); }
         }
     
-        function btnTab() {
-            currentPosition = newTextarea.selectionStart;
-            newTextarea.value = `${newTextarea.value.slice(0, currentPosition)}\t${newTextarea.value.slice(currentPosition+1)}`;
-            newTextarea.setSelectionRange(currentPosition + 1, currentPosition + 1);
+        function btnTab() { 
+            newTextarea.setRangeText("   ", newTextarea.selectionStart, newTextarea.selectionEnd, "end"); 
         }
     
         function btnCapsLock() {
@@ -341,10 +324,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     
         function btnEnter() {
-            deleteText();
-            currentPosition = newTextarea.selectionStart;
-            newTextarea.value = `${newTextarea.value.slice(0, currentPosition)}\n${newTextarea.value.slice(currentPosition+1)}`;
-            newTextarea.setSelectionRange(currentPosition + 1, currentPosition + 1);
+            newTextarea.setRangeText("\n", newTextarea.selectionStart, newTextarea.selectionEnd, "end");
         }
     
     
@@ -367,36 +347,33 @@ window.addEventListener("DOMContentLoaded", function () {
             currentPosition = newTextarea.selectionEnd;
             var previousLine = newTextarea.value.lastIndexOf("\n", currentPosition);
             var prePreviousLine = newTextarea.value.lastIndexOf("\n", previousLine - 1);
-            if (previousLine === -1) {currentPosition = 0; }
-            currentPosition = currentPosition - previousLine;
-            newTextarea.selectionStart = newTextarea.selectionEnd = prePreviousLine + currentPosition; 
+            console.log(previousLine);
+            console.log(prePreviousLine);
+            if(previousLine - prePreviousLine -1 <10){
+                currentPosition = 0; 
+                newTextarea.selectionStart = newTextarea.selectionEnd = currentPosition;
+            }
+            else if (prePreviousLine === -1) {
+                currentPosition = 0; 
+                newTextarea.selectionStart = newTextarea.selectionEnd = prePreviousLine + currentPosition;}
+            else { currentPosition = currentPosition - previousLine;
+            newTextarea.selectionStart = newTextarea.selectionEnd = prePreviousLine + currentPosition; }
         }
     
         function DownArrow() {
             currentPosition = newTextarea.selectionEnd;
             var previousLine = newTextarea.value.lastIndexOf("\n", currentPosition);
-            var nextLine = newTextarea.value.indexOf("\n", currentPosition + 1);
-            console.log(nextLine);
-            if (nextLine === -1) {currentPosition = currentPosition + newTextarea.value.length; }
-            currentPosition = currentPosition - previousLine;
-            newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition; 
+            var nextLine = newTextarea.value.indexOf("\n", currentPosition + 1); 
+            if (nextLine === -1) {
+                currentPosition = currentPosition + newTextarea.value.length; 
+                newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition;}
+            else {currentPosition = currentPosition - previousLine;
+            newTextarea.selectionStart = newTextarea.selectionEnd = nextLine + currentPosition; }
         }
-    
+     
 
-
-
-    // :D
-        var kuma = document.getElementById("kuma");
-        kuma.style.cursor = "pointer";
-        kuma.addEventListener( "click", () => { 
-            kuma.insertAdjacentHTML("beforeend", "<img src=\"kuma.jpg\" alt =\"kuma\">");
-              setTimeout( function () { 
-                    kuma.remove(kuma.lastElementChild);   
-                }, 1100); 
-            });  
-    
-    
-        const matrixText = ["Hello, Neo!\n", "I watching you....."];
+    // :D   
+        const matrixText = ["I'm watching you....."];
             function text(){
                 let line =0;
                 let count = 0;
@@ -416,14 +393,12 @@ window.addEventListener("DOMContentLoaded", function () {
                             }
                         }
                         type();
-                    }, random(random(340*2.2)));
+                    }, random(random(340*1.9)));
                 }
                 type();
             }
             function random(max) {
                 return Math.floor(Math.random()*Math.floor(max));
             }
-            text();
-
-
+            text(); 
     });
