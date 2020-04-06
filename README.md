@@ -1,6 +1,5 @@
-(I made this app on master branch only.. that's why I don't have a PR >_<)
+**переключить язык: Shift & Alt 💙**
 
-#completed task ---> 
 https://davinchick.github.io/virtual-keyboard/virtual_keyboard.html
 
 **RSS virtual-keyboard**
