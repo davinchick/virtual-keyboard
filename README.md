@@ -1,11 +1,12 @@
 # virtual-keyboard
 
-переключить язык: Shift & Alt 💙
-
 ** https://davinchick.github.io/virtual-keyboard/virtual_keyboard.html **
 
-💙 RSS virtual-keyboard
-_______________________________________________________________________
+______________________________________________________________________
+
+**переключить язык: Shift & Alt 💙**
+
+https://davinchick.github.io/virtual-keyboard/virtual_keyboard.html
 
 *Requirements:*
 
