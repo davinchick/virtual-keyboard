@@ -16,3 +16,12 @@ https://davinchick.github.io/virtual-keyboard/virtual_keyboard.html
 - create button click animation,
 - use ES6 standarts, such as classes, destructuring,
 - use Eslint tool and write pure code.
+
+
+Требования к Pull Request (PR)
+Описание Pull Request должно содержать следующую информацию
+ссылка на задание
+скриншот вашего задания (достаточного одного), ссылка либо прямо вставленая в пул реквест
+ссылка на демо (github pages, netlify, etc.)
+дата сдачи / дата дедлайна
+ваша самопроверка с предварительной оценкой
